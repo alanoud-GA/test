@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import FilmDetails from './FilmDetails.js';
+import FilmListing from './FilmListing.js';
+import TMDB from './TMDB.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    films: TMDB.films,
+    faves: [],
+    current: {}
+  }
+
+  handleFaveToggle(fav) {
+    // const faves = this.state.faves
+    // faves.push(fav)
+    // this.setState({ faves })
+  }
+  render() {
+    return (
+      <div className="App" >
+        <div className="film-library">
+          <FilmListing faves={this.state.faves} films={this.state.films} />
+          <FilmDetails film={this.state.current} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
